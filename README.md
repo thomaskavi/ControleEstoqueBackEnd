@@ -17,16 +17,16 @@ Este projeto é um sistema de controle de estoque para lojas de roupas. Com ele,
 ## Tecnologias Utilizadas
 
 - **Backend:** Spring Boot
-- **Frontend:** React
-- **Banco de Dados:** NoSQL
+- **Frontend:** (Sem previsão)
+- **Banco de Dados:** MySQL
 - **Ferramentas:** Git, GitHub
 
 ## Instalação
 
 ### Pré-requisitos
 
-- [Java 11+](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-- [Node.js](https://nodejs.org/)
+- [Java 17]([https://www.oracle.com/java/technologies/javase-jdk17-downloads.html](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html))
+- [MySQL]([https://nodejs.org/](https://www.mysql.com/downloads/))
 - [Git](https://git-scm.com/)
 
 ### Passos para Instalar
