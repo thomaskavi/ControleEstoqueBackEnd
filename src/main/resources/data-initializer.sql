@@ -1,8 +1,14 @@
-INSERT INTO ROUPA (CONTATO_FORNECEDOR, COR, DESCRICAO, PRECOAVISTA, PRECO_PARCELADO, REFERENCIA, TAMANHO, UNIDADES) 
-VALUES ('Fornecedor A', 'Vermelho', 'Produto 1', 100.00, 110.00, 'REF123', 'M', 10);
+-- Inserção de dados na tabela fornecedor
+INSERT INTO fornecedor (contato, nome) VALUES ('123456789', 'Fornecedor A');
+INSERT INTO fornecedor (contato, nome) VALUES ('987654321', 'Fornecedor B');
+INSERT INTO fornecedor (contato, nome) VALUES ('555555555', 'Fornecedor C');
 
-INSERT INTO ROUPA (CONTATO_FORNECEDOR, COR, DESCRICAO, PRECOAVISTA, PRECO_PARCELADO, REFERENCIA, TAMANHO, UNIDADES) 
-VALUES ('Fornecedor B', 'Azul', 'Produto 2', 150.00, 165.00, 'REF124', 'L', 20);
+-- Inserção de dados na tabela roupa
+INSERT INTO roupa (referencia, descricao, tamanho, cor, unidades, precoavista, preco_parcelado) 
+VALUES ('REF123', 'Produto 1', 'M', 'Vermelho', 10, 100.00, 110.00);
 
-INSERT INTO ROUPA (CONTATO_FORNECEDOR, COR, DESCRICAO, PRECOAVISTA, PRECO_PARCELADO, REFERENCIA, TAMANHO, UNIDADES) 
-VALUES ('Fornecedor C', 'Verde', 'Produto 3', 200.00, 220.00, 'REF125', 'S', 30);
+INSERT INTO roupa (referencia, descricao, tamanho, cor, unidades, precoavista, preco_parcelado) 
+VALUES ('REF124', 'Produto 2', 'L', 'Azul', 20, 150.00, 165.00);
+
+INSERT INTO roupa (referencia, descricao, tamanho, cor, unidades, precoavista, preco_parcelado) 
+VALUES ('REF125', 'Produto 3', 'S', 'Verde', 30, 200.00, 220.00);

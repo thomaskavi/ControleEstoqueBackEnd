@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import com.estoque.lelu.validation.NonBlank;
@@ -42,23 +44,12 @@ public class Roupa {
 	@Min(value = 0, message = "Preço parcelado deve ser maior ou igual a 0.")
 	private Double precoParcelado;
 
-	private String contatoFornecedor;
-
 	@PostConstruct
 	private void trimFields() {
 		this.referencia = this.referencia != null ? this.referencia.trim() : null;
 		this.descricao = this.descricao != null ? this.descricao.trim() : null;
 		this.tamanho = this.tamanho != null ? this.tamanho.trim() : null;
 		this.cor = this.cor != null ? this.cor.trim() : null;
-		this.contatoFornecedor = this.contatoFornecedor != null ? this.contatoFornecedor.trim() : null;
-	}
-
-	public String getContatoFornecedor() {
-		return contatoFornecedor;
-	}
-
-	public void setContatoFornecedor(String contatoFornecedor) {
-		this.contatoFornecedor = contatoFornecedor;
 	}
 
 	public Long getId() {
