@@ -31,7 +31,7 @@ public class Roupa {
 	private String cor;
 
 	@NotEmptyInteger(message = "Unidade não pode estar em branco.")
-	@Min(value = 0, message = "Unidade deve ser maior ou igual a 0.")
+	@Min(value = 0, message = "Unidade deve ser maior que 0.")
 	private Integer unidades;
 
 	@NotEmptyDouble(message = "Preço a vista não pode estar em branco.")
