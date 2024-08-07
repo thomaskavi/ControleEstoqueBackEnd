@@ -21,23 +21,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estoque.lelu.model.Roupa;
-import com.estoque.lelu.service.RoupaService;
+import com.estoque.lelu.model.Produto;
+import com.estoque.lelu.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/roupas")
-public class RoupaController {
+@RequestMapping("/api/produtos")
+public class ProdutoController {
 
 	@Autowired
-	private RoupaService roupaService;
+	private ProdutoService produtoService;
 
 	@GetMapping
-	public List<Roupa> listarRoupas() {
-		return roupaService.listarRoupas();
+	public List<Produto> listarProduto() {
+		return produtoService.listarProdutos();
 	}
 
 	@PostMapping
-	public ResponseEntity<?> adicionarRoupa(@Valid @RequestBody Roupa roupa, BindingResult result) {
+	public ResponseEntity<?> adicionarProduto(@Valid @RequestBody Produto produto, BindingResult result) {
 		if (result.hasErrors()) {
 			List<String> errors = result.getAllErrors().stream().map(error -> {
 				if (error instanceof FieldError) {
@@ -48,25 +48,25 @@ public class RoupaController {
 			}).collect(Collectors.toList());
 			return ResponseEntity.badRequest().body(errors);
 		}
-		Roupa roupaSalva = roupaService.salvarRoupa(roupa);
+		Produto roupaSalva = produtoService.salvarProduto(produto);
 		return ResponseEntity.ok(roupaSalva);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> buscarRoupa(@PathVariable Long id) {
-	    Roupa roupa = roupaService.buscarRoupaPorId(id);
-	    if (roupa == null) {
+	public ResponseEntity<Object> buscarProduto(@PathVariable Long id) {
+	    Produto produto = produtoService.buscarProdutoPorId(id);
+	    if (produto == null) {
 	        // Mensagem de erro detalhada
 	        Map<String, String> errorResponse = new HashMap<>();
-	        errorResponse.put("message", "Roupa com ID " + id + " não encontrada.");
+	        errorResponse.put("message", "Produto com ID " + id + " não encontrada.");
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 	    }
-	    return ResponseEntity.ok(roupa);
+	    return ResponseEntity.ok(produto);
 	}
 
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> atualizarRoupa(@PathVariable Long id, @Valid @RequestBody Roupa roupa,
+	public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produto,
 			BindingResult result) {
 		if (result.hasErrors()) {
 			List<String> errors = result.getAllErrors().stream().map(error -> {
@@ -78,7 +78,7 @@ public class RoupaController {
 			}).collect(Collectors.toList());
 			return ResponseEntity.badRequest().body(errors);
 		}
-		Roupa roupaAtualizada = roupaService.atualizarRoupa(id, roupa);
+		Produto roupaAtualizada = produtoService.atualizarProduto(id, produto);
 		if (roupaAtualizada == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -86,8 +86,8 @@ public class RoupaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletarRoupa(@PathVariable Long id) {
-		roupaService.deletarRoupa(id);
+	public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
+		produtoService.deletarProduto(id);
 		return ResponseEntity.noContent().build();
 	}
 }

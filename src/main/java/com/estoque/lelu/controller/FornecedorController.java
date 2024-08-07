@@ -1,6 +1,7 @@
 package com.estoque.lelu.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,17 +38,15 @@ public class FornecedorController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Fornecedor> buscarFornecedor(@PathVariable Long id) {
-		Fornecedor fornecedor = fornecedorService.buscarFornecedorPorId(id);
-		if (fornecedor == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(fornecedor);
+		Optional<Fornecedor> fornecedor = fornecedorService.buscarFornecedorPorId(id);
+		return fornecedor.isPresent() ? ResponseEntity.ok(fornecedor.get()) : ResponseEntity.notFound().build();
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Fornecedor> atualizarFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedorAtualizado) {
-		Fornecedor fornecedorExistente = fornecedorService.buscarFornecedorPorId(id);
-		if (fornecedorExistente == null) {
+	public ResponseEntity<Fornecedor> atualizarFornecedor(@PathVariable Long id,
+			@RequestBody Fornecedor fornecedorAtualizado) {
+		Optional<Fornecedor> fornecedorExistente = fornecedorService.buscarFornecedorPorId(id);
+		if (!fornecedorExistente.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		fornecedorAtualizado.setId(id); // Garantir que o ID não seja alterado
@@ -57,7 +56,9 @@ public class FornecedorController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarFornecedor(@PathVariable Long id) {
-		fornecedorService.deletarFornecedor(id);
-		return ResponseEntity.noContent().build();
+		if (fornecedorService.deletarFornecedor(id)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 }

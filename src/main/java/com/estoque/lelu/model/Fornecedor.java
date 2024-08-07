@@ -1,52 +1,42 @@
 package com.estoque.lelu.model;
 
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.estoque.lelu.validation.NonBlank;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 public class Fornecedor {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NonBlank(message = "Nome não pode estar em branco.")
+	@NonBlank(message = "Nome não pode ser vazio")
 	private String nome;
-	@NonBlank(message = "Contato não pode estar em branco.")
+
 	private String contato;
 
-	public Long getId() {
-		return id;
-	}
+	@Email(message = "Email inválido")
+	private String email;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@NonBlank(message = "Telefone não pode estar vazio")
+	private String telefone;
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
-	}
+	@NonBlank(message = "Localização não pode ser vazia")
+	private String localizacao;
 
 	@Override
 	public int hashCode() {

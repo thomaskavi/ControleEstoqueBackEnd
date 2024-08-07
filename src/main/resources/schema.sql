@@ -1,22 +1,25 @@
 -- Excluir tabelas se elas existirem
-DROP TABLE IF EXISTS roupa;
+DROP TABLE IF EXISTS produto;
 DROP TABLE IF EXISTS fornecedor;
 
 -- Criar a tabela fornecedor
 CREATE TABLE fornecedor (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    CONTATO VARCHAR(50),
-    NOME VARCHAR(100)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    contato VARCHAR(50),
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    localizacao VARCHAR(255) NOT NULL
 );
 
--- Criar a tabela roupa sem referência ao fornecedor
-CREATE TABLE roupa (
+-- Criar a tabela produto
+CREATE TABLE produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referencia VARCHAR(100),
-    descricao VARCHAR(255),
-    tamanho VARCHAR(10),
-    cor VARCHAR(50),
-    unidades INT,
-    precoavista DECIMAL(10, 2),
-    preco_parcelado DECIMAL(10, 2)
+    referencia VARCHAR(100) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    tamanho VARCHAR(10) NOT NULL,
+    cor VARCHAR(50) NOT NULL,
+    unidades INT NOT NULL,
+    precoavista DECIMAL(10, 2) NOT NULL,
+    preco_parcelado DECIMAL(10, 2) NOT NULL
 );

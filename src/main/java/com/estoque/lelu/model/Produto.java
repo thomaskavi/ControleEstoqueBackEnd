@@ -5,16 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import com.estoque.lelu.validation.NonBlank;
 import com.estoque.lelu.validation.NotEmptyDouble;
 import com.estoque.lelu.validation.NotEmptyInteger;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-public class Roupa {
+public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,70 +57,6 @@ public class Roupa {
 		this.cor = this.cor != null ? this.cor.trim() : null;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getTamanho() {
-		return tamanho;
-	}
-
-	public void setTamanho(String tamanho) {
-		this.tamanho = tamanho;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
-
-	public Integer getUnidades() {
-		return unidades;
-	}
-
-	public void setUnidades(Integer unidades) {
-		this.unidades = unidades;
-	}
-
-	public Double getPrecoAVista() {
-		return precoAVista;
-	}
-
-	public void setPrecoAVista(Double precoAVista) {
-		this.precoAVista = precoAVista;
-	}
-
-	public Double getPrecoParcelado() {
-		return precoParcelado;
-	}
-
-	public void setPrecoParcelado(Double precoParcelado) {
-		this.precoParcelado = precoParcelado;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -132,7 +73,7 @@ public class Roupa {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Roupa other = (Roupa) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
