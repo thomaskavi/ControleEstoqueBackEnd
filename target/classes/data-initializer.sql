@@ -1,3 +1,7 @@
+--comando para H2 db spring.sql.init.data-locations=classpath:data-initializer.sql
+
+
+
 -- Inserir dados na tabela fornecedor
 INSERT INTO fornecedor (nome, contato, email, telefone, localizacao) VALUES
 ('José Silva', '11987654321', 'jose.silva@exemplo.com', '+55 11 98765-4321', 'Rua das Flores, 123, São Paulo, SP'),

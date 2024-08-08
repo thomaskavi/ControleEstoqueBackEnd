@@ -1,3 +1,7 @@
+--comando para H2 DB spring.sql.init.schema-locations=classpath:schema.sql
+
+
+
 -- Excluir tabelas se elas existirem
 DROP TABLE IF EXISTS produto;
 DROP TABLE IF EXISTS fornecedor;
