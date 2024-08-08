@@ -12,7 +12,7 @@ CREATE TABLE fornecedor (
     localizacao VARCHAR(255) NOT NULL
 );
 
--- Criar a tabela produto
+-- Criar a tabela produto com a coluna fornecedor_id
 CREATE TABLE produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     referencia VARCHAR(100) NOT NULL,
@@ -21,5 +21,7 @@ CREATE TABLE produto (
     cor VARCHAR(50) NOT NULL,
     unidades INT NOT NULL,
     precoavista DECIMAL(10, 2) NOT NULL,
-    preco_parcelado DECIMAL(10, 2) NOT NULL
+    preco_parcelado DECIMAL(10, 2) NOT NULL,
+    fornecedor_id INT,
+    FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
 );

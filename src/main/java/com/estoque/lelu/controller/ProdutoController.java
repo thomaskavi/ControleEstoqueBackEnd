@@ -1,14 +1,12 @@
 package com.estoque.lelu.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -32,8 +30,19 @@ public class ProdutoController {
 	private ProdutoService produtoService;
 
 	@GetMapping
-	public List<Produto> listarProduto() {
-		return produtoService.listarProdutos();
+	public ResponseEntity<List<Produto>> listarProdutos() {
+		List<Produto> produtos = produtoService.listarProdutos();
+		return ResponseEntity.ok(produtos);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> buscarProdutoPorId(@PathVariable Long id) {
+		Produto produto = produtoService.buscarProdutoPorId(id);
+		if (produto != null) {
+			return ResponseEntity.ok(produto);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PostMapping
@@ -48,22 +57,13 @@ public class ProdutoController {
 			}).collect(Collectors.toList());
 			return ResponseEntity.badRequest().body(errors);
 		}
-		Produto roupaSalva = produtoService.salvarProduto(produto);
-		return ResponseEntity.ok(roupaSalva);
+		try {
+			Produto produtoSalvo = produtoService.salvarProduto(produto);
+			return ResponseEntity.ok(produtoSalvo);
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<Object> buscarProduto(@PathVariable Long id) {
-	    Produto produto = produtoService.buscarProdutoPorId(id);
-	    if (produto == null) {
-	        // Mensagem de erro detalhada
-	        Map<String, String> errorResponse = new HashMap<>();
-	        errorResponse.put("message", "Produto com ID " + id + " não encontrada.");
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-	    }
-	    return ResponseEntity.ok(produto);
-	}
-
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produto,
@@ -78,16 +78,25 @@ public class ProdutoController {
 			}).collect(Collectors.toList());
 			return ResponseEntity.badRequest().body(errors);
 		}
-		Produto roupaAtualizada = produtoService.atualizarProduto(id, produto);
-		if (roupaAtualizada == null) {
+		try {
+			Produto produtoAtualizado = produtoService.atualizarProduto(id, produto);
+			return ResponseEntity.ok(produtoAtualizado);
+		} catch (EntityNotFoundException e) {
 			return ResponseEntity.notFound().build();
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		return ResponseEntity.ok(roupaAtualizada);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
-		produtoService.deletarProduto(id);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<?> deletarProduto(@PathVariable Long id) {
+		try {
+			produtoService.deletarProduto(id);
+			return ResponseEntity.noContent().build(); // Retorna 204 No Content
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.notFound().build(); // Retorna 404 Not Found
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 }

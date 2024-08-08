@@ -29,13 +29,13 @@ public class Fornecedor {
 
 	private String contato;
 
-	@Email(message = "Email inválido")
+	//@Email(message = "Email inválido")
 	private String email;
 
 	@NonBlank(message = "Telefone não pode estar vazio")
 	private String telefone;
 
-	@NonBlank(message = "Localização não pode ser vazia")
+	//@NonBlank(message = "Localização não pode ser vazia")
 	private String localizacao;
 
 	@Override

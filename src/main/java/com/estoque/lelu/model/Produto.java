@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import com.estoque.lelu.validation.NonBlank;
@@ -48,6 +50,10 @@ public class Produto {
 	@NotEmptyDouble(message = "Preço parcelado não pode estar em branco.")
 	@Min(value = 0, message = "Preço parcelado deve ser maior ou igual a 0.")
 	private Double precoParcelado;
+
+	@ManyToOne
+	@JoinColumn(name = "fornecedor_id")
+	private Fornecedor fornecedor;
 
 	@PostConstruct
 	private void trimFields() {

@@ -7,7 +7,9 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estoque.lelu.model.Fornecedor;
 import com.estoque.lelu.model.Produto;
+import com.estoque.lelu.repositories.FornecedorRepository;
 import com.estoque.lelu.repositories.ProdutoRepository;
 
 @Service
@@ -16,11 +18,22 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private FornecedorRepository fornecedorRepository;
+
 	public List<Produto> listarProdutos() {
 		return produtoRepository.findAll();
 	}
 
 	public Produto salvarProduto(Produto produto) {
+		if (produto.getFornecedor() == null || produto.getFornecedor().getId() == null) {
+			throw new RuntimeException("Fornecedor deve ser fornecido");
+		}
+
+		Fornecedor fornecedor = fornecedorRepository.findById(produto.getFornecedor().getId())
+				.orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
+
+		produto.setFornecedor(fornecedor);
 		return produtoRepository.save(produto);
 	}
 
@@ -36,7 +49,6 @@ public class ProdutoService {
 		Produto produtoExistente = produtoRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Produto não encontrada"));
 
-		// Atualiza apenas os campos fornecidos
 		if (produtoAtualizado.getReferencia() != null) {
 			produtoExistente.setReferencia(produtoAtualizado.getReferencia());
 		}
@@ -49,17 +61,21 @@ public class ProdutoService {
 		if (produtoAtualizado.getCor() != null) {
 			produtoExistente.setCor(produtoAtualizado.getCor());
 		}
-		if (produtoAtualizado.getUnidades() != null) { // Usando Integer
+		if (produtoAtualizado.getUnidades() != null) {
 			produtoExistente.setUnidades(produtoAtualizado.getUnidades());
 		}
-		if (produtoAtualizado.getPrecoAVista() != null) { // Usando Double
+		if (produtoAtualizado.getPrecoAVista() != null) {
 			produtoExistente.setPrecoAVista(produtoAtualizado.getPrecoAVista());
 		}
-		if (produtoAtualizado.getPrecoParcelado() != null) { // Usando Double
+		if (produtoAtualizado.getPrecoParcelado() != null) {
 			produtoExistente.setPrecoParcelado(produtoAtualizado.getPrecoParcelado());
 		}
+		if (produtoAtualizado.getFornecedor() != null && produtoAtualizado.getFornecedor().getId() != null) {
+			Fornecedor fornecedor = fornecedorRepository.findById(produtoAtualizado.getFornecedor().getId())
+					.orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
+			produtoExistente.setFornecedor(fornecedor);
+		}
 
-		// Salvar a produto atualizada
 		return produtoRepository.save(produtoExistente);
 	}
 }
