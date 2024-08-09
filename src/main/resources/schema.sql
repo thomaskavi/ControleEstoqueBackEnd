@@ -1,7 +1,3 @@
---comando para H2 DB spring.sql.init.schema-locations=classpath:schema.sql
-
-
-
 -- Excluir tabelas se elas existirem
 DROP TABLE IF EXISTS produto;
 DROP TABLE IF EXISTS fornecedor;
@@ -12,8 +8,8 @@ CREATE TABLE fornecedor (
     nome VARCHAR(100) NOT NULL,
     contato VARCHAR(50),
     email VARCHAR(100),
-    telefone VARCHAR(20),
-    localizacao VARCHAR(255) NOT NULL
+    telefone VARCHAR(20) NOT NULL,
+    localizacao VARCHAR(255)
 );
 
 -- Criar a tabela produto com a coluna fornecedor_id
@@ -24,7 +20,7 @@ CREATE TABLE produto (
     tamanho VARCHAR(10) NOT NULL,
     cor VARCHAR(50) NOT NULL,
     unidades INT NOT NULL,
-    precoavista DECIMAL(10, 2) NOT NULL,
+    preco_a_vista DECIMAL(10, 2) NOT NULL,
     preco_parcelado DECIMAL(10, 2) NOT NULL,
     fornecedor_id INT,
     FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
