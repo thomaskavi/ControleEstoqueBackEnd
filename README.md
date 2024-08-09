@@ -1,6 +1,4 @@
-Claro, vamos atualizar o README do backend para refletir as melhorias e funcionalidades atuais:
-
----
+(LINK DO YOUTUBE NO FIM DO README)
 
 # Sistema de Controle de Estoque e Vendas - Backend
 
