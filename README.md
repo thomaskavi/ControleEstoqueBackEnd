@@ -1,26 +1,28 @@
-Aqui está uma versão atualizada do README para refletir as mudanças no projeto:
+Claro, vamos atualizar o README do backend para refletir as melhorias e funcionalidades atuais:
 
 ---
 
-# Sistema de Controle de Estoque e Vendas
+# Sistema de Controle de Estoque e Vendas - Backend
 
-Este projeto é um sistema de controle de estoque e vendas para lojas de roupas. Embora ainda esteja em desenvolvimento, ele já permite o cadastro de produtos e fornecedores. O objetivo é expandir as funcionalidades para incluir a realização de vendas e outras melhorias futuras.
+Este repositório contém o backend do sistema de controle de estoque e vendas para lojas de roupas, desenvolvido com Spring Boot. O projeto está em desenvolvimento e já permite o cadastro, edição e remoção de produtos e fornecedores. O banco de dados utilizado para desenvolvimento é o H2 Database, com a versão final planejada para usar MySQL.
 
 ## Funcionalidades Atuais
 
 - **Cadastrar Produtos:** Adicione novos itens ao estoque.
+- **Editar Produtos:** Atualize informações sobre produtos existentes.
+- **Remover Produtos:** Exclua itens do estoque.
 - **Cadastrar Fornecedores:** Armazene informações sobre fornecedores.
+- **Editar Fornecedores:** Atualize informações sobre fornecedores existentes.
+- **Remover Fornecedores:** Exclua fornecedores cadastrados.
 
 ### Funcionalidades Futuras
 
 - **Realizar Vendas:** Possibilidade de registrar vendas diretamente no sistema.
-- **Atualizar Produtos e Fornecedores:** Atualize informações sobre produtos e fornecedores existentes.
 - **Visualizar Estoque:** Veja uma lista de todos os produtos no estoque.
 
 ## Tecnologias Utilizadas
 
 - **Backend:** Spring Boot
-- **Frontend:** (Em desenvolvimento)
 - **Banco de Dados:** H2 Database (para desenvolvimento), MySQL (versão final)
 - **Ferramentas:** Git, GitHub
 
@@ -32,8 +34,6 @@ Este projeto é um sistema de controle de estoque e vendas para lojas de roupas.
 - [Git](https://git-scm.com/)
 
 ### Passos para Instalar
-
-(VÍDEO MOSTRANDO PROJETO FUNCIONAR https://youtu.be/zKvSOXkv5SE)
 
 1. **Clone o repositório:**
    ```bash
@@ -50,4 +50,12 @@ Este projeto é um sistema de controle de estoque e vendas para lojas de roupas.
    ```
 
 4. **Acesse o sistema:**
-   - Acesse a aplicação através do [localhost](http://localhost:8080)
+   - Acesse a aplicação através do [localhost](http://localhost:8080).
+
+## Demonstração
+
+- Assista ao vídeo mostrando o projeto funcionando: [Vídeo](https://youtu.be/zKvSOXkv5SE)
+
+---
+
+Se precisar de mais ajustes ou tiver mais informações para incluir, é só me avisar!
