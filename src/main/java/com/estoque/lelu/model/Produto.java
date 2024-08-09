@@ -1,6 +1,7 @@
 package com.estoque.lelu.model;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,10 +46,12 @@ public class Produto {
 
 	@NotEmptyDouble(message = "Preço a vista não pode estar em branco.")
 	@Min(value = 0, message = "Preço a vista deve ser maior ou igual a 0.")
+	@Column(name = "preco_a_vista")
 	private Double precoAVista;
 
 	@NotEmptyDouble(message = "Preço parcelado não pode estar em branco.")
 	@Min(value = 0, message = "Preço parcelado deve ser maior ou igual a 0.")
+	@Column(name = "preco_parcelado")
 	private Double precoParcelado;
 
 	@ManyToOne
