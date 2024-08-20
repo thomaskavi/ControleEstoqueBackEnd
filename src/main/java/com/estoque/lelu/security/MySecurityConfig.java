@@ -14,10 +14,10 @@ public class MySecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(requests -> requests.antMatchers(HttpMethod.GET, "/free").permitAll()
-						.anyRequest().authenticated())
-				.cors().and().addFilterBefore(new MyFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.csrf().disable().authorizeHttpRequests().antMatchers(HttpMethod.GET, "/free").permitAll()
+				.antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated().and().cors();
+
+		http.addFilterBefore(new MyFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}
